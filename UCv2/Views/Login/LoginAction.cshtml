@@ -1,0 +1,36 @@
+﻿@model Comic.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2 style="left:40%; position:fixed;">Login stranica</h2>*@
+<img style="left:36%; top:8%; position:fixed;" src="~/Content/comics.png"/>
+@using (Html.BeginForm("LoginAction", "Login", FormMethod.Post))
+{
+    <fieldset style="margin:auto; position:fixed; top: 25%;
+   left: 40%;">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @if (@ViewBag.Message != null)
+        {
+            <div style="border: 1px solid red">
+                @ViewBag.Message
+            </div>
+        }
+        <table>
+            <tr><td style="text-align:center">@Html.LabelFor(a => a.Username)</td></tr>
+            <tr><td>@Html.TextBoxFor(a => a.Username)</td></tr>
+            <tr><td>@Html.ValidationMessageFor(a => a.Username)</td></tr>
+            <tr><td style="text-align:center">@Html.LabelFor(a => a.Password)</td></tr>
+            <tr><td>@Html.PasswordFor(a => a.Password)</td></tr>
+            <tr><td>@Html.ValidationMessageFor(a => a.Password)</td></tr>
+            <tr>
+                <td style="text-align:center">
+                    <input type="submit" value="Login" class="btn btn-success"/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}  

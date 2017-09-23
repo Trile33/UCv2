@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Comic.Models.Comic>
+
+@{
+    ViewBag.Title = "ListAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista svih stripova u kategoriji</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EpisodeNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>Naslovna strana</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EpisodeNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @if (item.FilePaths.Any(f => f.FileType == Comic.Models.FileType.Photo))
+            {
+
+                <img width="80" height="120" src="~/Images/@item.FilePaths.Last().FileName" alt="" />
+            }
+        </td>
+
+    </tr>
+}
+
+</table>
+@Html.ActionLink("Nazad", "Index", null, new {@class = "btn btn-sm btn-primary"})

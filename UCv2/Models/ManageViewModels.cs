@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace UCv2.Models
+namespace Comic.Models
 {
     public class IndexViewModel
     {

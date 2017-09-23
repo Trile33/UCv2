@@ -1,0 +1,16 @@
+﻿@model Comic.Models.Korisnik
+
+@{
+    ViewBag.Title = "UserDashBoard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UserDashBoard</h2>
+
+<fieldset>
+    < legend > User DashBoard < /legend>
+
+@if (Session["Username"] != null)
+{ <text>Welcome @Session["Username"].ToString() </text>
+    
+    } </fieldset>  

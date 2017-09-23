@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Comic.Models.Strip>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stripovi</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Pretraži po nazivu: @Html.TextBox("search")
+        <input type="submit" value="Pretraži" />
+    </p>
+}
+<p>
+    @Html.ActionLink("Dodaj novi strip", "Create", null, new { @class = "btn btn-primary btn-sm" })
+</p>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrojIzdanja)
+        </th>
+        <th>Naslovna strana</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategorija)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojIzdanja)
+            </td>
+            <td>
+                @if (item.FilePaths.Any(f => f.FileType == Comic.Models.FileType.Photo))
+                {
+
+                    <img width="80" height="120" src="~/Images/@item.FilePaths.Last().FileName" alt="" />
+                }
+
+
+            </td>
+            <td>
+
+                @Html.ActionLink("Uredi strip", "Edit", new { id = item.StripId }, new { @class = "btn btn-sm btn-primary" })
+                @Html.ActionLink("Detalji", "Details", new { id = item.StripId }, new { @class = "btn btn-sm btn-primary" })
+
+            </td>
+        </tr>
+    }
+
+</table>

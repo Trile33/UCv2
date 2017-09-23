@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Comic.Models.Kategorija>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kategorije</h2>
+@if (Session["AdminId"] != null)
+{
+<p>
+    @Html.ActionLink("Dodaj novu kategoriju", "Create", null, new { @class = "btn btn-sm btn-info"})
+</p>
+}
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Naziv)
+        </td>
+        <td>
+            @Html.ActionLink("Pogledaj sve stripove za kategoriju", "ListAll", new { naziv=item.Naziv }, new { @class = "btn btn-sm btn-primary" })
+            @if (Session["AdminId"] != null)
+            {
+                @Html.ActionLink("Uredi kategoriju", "Edit", new { id = item.KategorijaId }, new { @class = "btn btn-sm btn-primary" })
+            }
+        </td>
+    </tr>
+    }
+
+</table>
